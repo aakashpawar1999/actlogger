@@ -1,0 +1,73 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlanType {
+  FREE
+  PRO
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  projects     Project[]
+  subscription Subscription?
+  AuditLog     AuditLog[]
+}
+
+model Project {
+  id         String      @id @default(cuid())
+  name       String
+  ownerId    String
+  owner      User        @relation(fields: [ownerId], references: [id])
+  accessKeys AccessKey[]
+  auditLogs  AuditLog[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  plan      PlanType @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AccessKey {
+  id         String    @id @default(cuid())
+  key        String    @unique
+  projectId  String
+  project    Project   @relation(fields: [projectId], references: [id])
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime?
+  lastUsedAt DateTime?
+  isRevoked  Boolean   @default(false)
+}
+
+model AuditLog {
+  id           String   @id @default(cuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id])
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  actionType   String
+  createdAt    DateTime @default(now())
+  fieldName    String
+  fieldValue   String
+  ipAddress    String?
+  geoLocation  String?
+  browserInfo  String?
+  deviceInfo   String?
+  errorDetails String?
+}

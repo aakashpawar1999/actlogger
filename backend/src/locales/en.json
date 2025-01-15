@@ -1,0 +1,25 @@
+{
+  "ERROR": {
+    "UNAUTHORIZED": "Unauthorized request!"
+  },
+  "AUTH": {
+    "LOGIN_REQUEST_SUCCESS": "Login request successfully.",
+    "LOGIN_REQUEST_FAILURE": "Error during login request.",
+    "LOGIN_SUCCESS": "Login successfully.",
+    "LOGIN_FAILURE": "Error while logging in.",
+    "VALIDATION_SUCCESS": "Validation successfully.",
+    "VALIDATION_FAILURE": "Error during validation.",
+    "LOGOUT_SUCCESS": "Logout successfully.",
+    "LOGOUT_FAILURE": "Error while logging out."
+  },
+  "USER": {
+    "CREATE_USER_SUCCESS": "Create user successfully.",
+    "CREATE_USER_FAILURE": "Error while creating user.",
+    "GET_USERS_SUCCESS": "Get all user details successfully.",
+    "GET_USERS_FAILURE": "Error while getting all users details.",
+    "UPDATE_USER_BY_ID_SUCCESS": "User details updated successfully.",
+    "UPDATE_USER_BY_ID_FAILURE": "Error while updating user details.",
+    "DELETE_USER_BY_ID_SUCCESS": "User deleted successfully.",
+    "DELETE_USER_BY_ID_FAILURE": "Error while deleting user."
+  }
+}
